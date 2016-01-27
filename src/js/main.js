@@ -42,6 +42,17 @@ $('.card-cvc').on('blur', function() {
   }
 });
 
+$('.card-expiry').on('blur', function() {
+  var $exp = $('.card-expiry');
+  var expMonth = $exp.val().split('/')[0];
+  var expYear = $exp.val().split('/')[1]
+   if (!Stripe.card.validateExpiry(expMonth, expYear) ) {
+    $exp.css('background-color', 'red');
+  } else {
+    $exp.css('background-color', 'green');
+  }
+});
+
 // These will all return true, indicating a potentially valid card
 // number. (Letters, spaces, and other punctuation are ignored.)
 
