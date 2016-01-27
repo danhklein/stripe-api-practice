@@ -1,3 +1,5 @@
+//Needs Gulp to practice and then Local:8888
+
 // add scripts
 
 $(document).on('ready', function() {
