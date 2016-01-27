@@ -14,5 +14,12 @@ $('.order').on('click', function() {
   };
 
 Stripe.card.createToken(cardInfo, stripeResponseHandler);
+});
 
-
+function stripeResponseHandler(status, response) {
+  if (response.error) {
+    console.log(response.error.message);
+  } else {
+    console.log(response);
+  }
+}
