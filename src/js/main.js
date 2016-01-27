@@ -4,7 +4,7 @@ $(document).on('ready', function() {
   console.log('sanity check!');
   Stripe.setPublishableKey('pk_test_2n6HOH3q1Hod9NkFXdTKihY8');
 });
-
+//event handler to absorb all inputted values into an object.
 $('.order').on('click', function() {
   var cardInfo = {
     number: $('.card-number').val(),
@@ -15,7 +15,7 @@ $('.order').on('click', function() {
 
 Stripe.card.createToken(cardInfo, stripeResponseHandler);
 });
-
+//Logs error
 function stripeResponseHandler(status, response) {
   if (response.error) {
     console.log(response.error.message);
@@ -23,17 +23,23 @@ function stripeResponseHandler(status, response) {
     console.log(response.id);
   }
 }
-
+//Shows valid or not cards by changing CSS of input field
 $('.card-number').on('blur', function() {
   var $cardNum = $('.card-number');
-  var val = $cardNum.val();
-  if (!Stripe.card.validateCardNumber(val) ) {
+  if (!Stripe.card.validateCardNumber($cardNum.val()) ) {
     $cardNum.css('background-color', 'red');
   } else {
     $cardNum.css('background-color', 'green');
   }
+});
 
-
+$('.card-cvc').on('blur', function() {
+  var $cvc = $('.card-cvc');
+   if (!Stripe.card.validateCVC($cvc.val()) ) {
+    $cvc.css('background-color', 'red');
+  } else {
+    $cvc.css('background-color', 'green');
+  }
 });
 
 // These will all return true, indicating a potentially valid card
